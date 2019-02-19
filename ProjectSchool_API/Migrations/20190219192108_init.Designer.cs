@@ -8,7 +8,7 @@ using ProjectSchool_API.Data;
 namespace ProjectSchool_API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190219140852_init")]
+    [Migration("20190219192108_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,7 +40,7 @@ namespace ProjectSchool_API.Migrations
                         new
                         {
                             Id = 1,
-                            DataNasc = "01/01/2000",
+                            DataNasc = "01/05/2000",
                             Nome = "Maria",
                             ProfessorId = 1,
                             Sobrenome = "José"
@@ -48,7 +48,7 @@ namespace ProjectSchool_API.Migrations
                         new
                         {
                             Id = 2,
-                            DataNasc = "20/01/1990",
+                            DataNasc = "25/06/1999",
                             Nome = "João",
                             ProfessorId = 2,
                             Sobrenome = "Paulo"
@@ -56,10 +56,10 @@ namespace ProjectSchool_API.Migrations
                         new
                         {
                             Id = 3,
-                            DataNasc = "25/06/1981",
-                            Nome = "Alex",
+                            DataNasc = "11/07/1980",
+                            Nome = "Lucas",
                             ProfessorId = 3,
-                            Sobrenome = "Feraz"
+                            Sobrenome = "Machado"
                         });
                 });
 
@@ -78,7 +78,7 @@ namespace ProjectSchool_API.Migrations
                         new
                         {
                             Id = 1,
-                            Nome = "Vinicus"
+                            Nome = "Vinicius"
                         },
                         new
                         {
@@ -94,7 +94,7 @@ namespace ProjectSchool_API.Migrations
 
             modelBuilder.Entity("ProjectSchool_API.Models.Aluno", b =>
                 {
-                    b.HasOne("ProjectSchool_API.Models.Professor", "Professsor")
+                    b.HasOne("ProjectSchool_API.Models.Professor")
                         .WithMany("Alunos")
                         .HasForeignKey("ProfessorId")
                         .OnDelete(DeleteBehavior.Cascade);

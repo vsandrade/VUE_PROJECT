@@ -6,56 +6,43 @@ namespace ProjectSchool_API.Data
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base (options) { }
+        public DataContext(DbContextOptions<DataContext> options) : base (options) { }        
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Professor> Professores { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Professor>()
-                .HasData(
-                    new List<Professor>(){
-                        new Professor() {
-                            Id = 1,
-                            Nome = "Vinicus"
-                        },
-                        new Professor() {
-                            Id = 2,
-                            Nome = "Paula"
-                        },
-                        new Professor() {
-                            Id = 3,
-                            Nome = "Luna"
-                        }
-                    }
-                );
-
+                .HasData(new List<Professor>(){
+                    new Professor() { Id = 1, Nome = "Vinicius" },
+                    new Professor() { Id = 2, Nome = "Paula" },
+                    new Professor() { Id = 3, Nome = "Luna" }
+                });
+            
             builder.Entity<Aluno>()
-                .HasData(
-                    new List<Aluno>(){
-                        new Aluno() {
-                            Id = 1,
-                            Nome = "Maria",
-                            Sobrenome = "José",
-                            DataNasc = "01/01/2000",
-                            ProfessorId = 1
-                        },
-                        new Aluno() {
-                            Id = 2,
-                            Nome = "João",
-                            Sobrenome = "Paulo",
-                            DataNasc = "20/01/1990",
-                            ProfessorId = 2
-                        },
-                        new Aluno() {
-                            Id = 3,
-                            Nome = "Alex",
-                            Sobrenome = "Feraz",
-                            DataNasc = "25/06/1981",
-                            ProfessorId = 3
-                        }
-                    }
-                );
+                .HasData(new List<Aluno>(){
+                    new Aluno() { 
+                        Id = 1, 
+                        Nome = "Maria", 
+                        Sobrenome = "José", 
+                        DataNasc = "01/05/2000",
+                        ProfessorId = 1
+                    },
+                    new Aluno() { 
+                        Id = 2, 
+                        Nome = "João", 
+                        Sobrenome = "Paulo", 
+                        DataNasc = "25/06/1999",
+                        ProfessorId = 2
+                    },
+                    new Aluno() { 
+                        Id = 3, 
+                        Nome = "Lucas", 
+                        Sobrenome = "Machado", 
+                        DataNasc = "11/07/1980",
+                        ProfessorId = 3
+                     }
+                });
         }
     }
 }
