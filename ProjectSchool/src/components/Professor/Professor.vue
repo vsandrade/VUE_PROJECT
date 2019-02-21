@@ -1,6 +1,6 @@
 <template>
   <div>
-    <titulo texto="Professores"/>
+    <titulo texto="Professores" btnVoltar="true"/>
     <table>
       <thead>
         <th>Cód.</th>
@@ -17,12 +17,16 @@
             style="cursor: pointer"
           >{{professor.nome}} {{professor.sobrenome}}</router-link>
 
-          <td class="colPequeno">
-            {{professor.qtdAlunos}}
-          </td>
+          <td class="colPequeno">{{professor.qtdAlunos}}</td>
         </tr>
       </tbody>
-      <tfoot v-else>Nenhum Aluno Encontrado</tfoot>
+      <tfoot v-else>
+        <tr>
+          <td colspan="3" style="text-align: center">
+            <h5>Nenhum Professor Encontrado</h5>
+          </td>
+        </tr>
+      </tfoot>
     </table>
   </div>
 </template>
@@ -42,45 +46,43 @@ export default {
   },
   created() {
     this.$http
-    .get('http://localhost:3000/alunos')
-    .then(res => res.json())
-    .then(alunos => {
-      this.Alunos = alunos;
-      this.carregarProfessores();
-    })
+      .get("http://localhost:5000/api/aluno")
+      .then(res => res.json())
+      .then(alunos => {
+        this.Alunos = alunos;
+        this.carregarProfessores();
+      });
   },
-  props: {
-
-  },
+  props: {},
   methods: {
     pegarQtdAlunosPorProfessor() {
       this.Professores.forEach((professor, index) => {
         professor = {
           id: professor.id,
           nome: professor.nome,
-          qtdAlunos: this.Alunos.filter(aluno => 
-            aluno.professor.id == professor.id
+          qtdAlunos: this.Alunos.filter(
+            aluno => aluno.professor.id == professor.id
           ).length
-        }
+        };
         this.Professores[index] = professor;
       });
     },
     carregarProfessores() {
       this.$http
-        .get("http://localhost:3000/professores")
+        .get("http://localhost:5000/api/professor")
         .then(res => res.json())
         .then(professor => {
-          this.Professores = professor
+          this.Professores = professor;
           this.pegarQtdAlunosPorProfessor();
         });
     }
-  },
+  }
 };
 </script>
 
 <style scoped>
 .colPequeno {
-  text-align: center; 
-  width: 15%
+  text-align: center;
+  width: 15%;
 }
 </style>
